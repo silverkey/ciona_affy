@@ -1,0 +1,64 @@
+Order:
+
+1) downoload_gene_models.sh
+   downoload the different gene models, annotations and sequences from the aniseed webpage
+
+2) join_models.pl
+   parse the fasta and the annotations downloaded from aniseed
+   produce the file aniseed_models.xls, aniseed_models_go.xls, aniseed_models_seq.xls, aniseed_models.fa
+
+3) BLAST.sh
+   run the blast of the affy probe .sit annotation against the transcripts models
+   produce the blast db aniseed_models.blast and the blast result MEGABLAST_DEFAULT.out
+
+4) parse_blast.pl
+   parse the blast taking for each probeset the hits with coverage >75% and identity >90%
+   produce the file ASSOCIATIONS_PROBE_ANISEED.xls
+
+5) collate associations.pl
+   join the association of the blast with the annotations
+   produce the file PROBE_ANNOTATION.xls
+
+6) create_and_populate_db.pl
+   create a mysql database
+
+7) converter.sh
+   convert the mysql database in a sqlite database
+   create the file ciona_affy_annotation.sqlite3
+   ATTENTION: you have to change user and password into the script
+
+Other files we use (TODO: to put the download of them into a script, at least the GO):
+
+- CINT06a520380F.sif the file containing the sequences used by affy to design the probes.
+  We modified it in CINT06a520380F_sif.fa in order to put it in fasta format for the blast
+  to be used.
+
+- GO table (GO.terms_alt_ids downoloaded from http://www.geneontology.org/doc/GO.terms_alt_ids)
+
+Then in order to build the database we need the tables:
+- PROBE_ANNOTATION.xls
+- aniseed_models_go.xls
+- aniseed_models_seq.xls
+- GO.terms_alt_ids
+
+You need to have everything in the same folder.
+
+This are all the file we have at the beginning:
+
+BLAST.sh
+collate_associations.pl
+download_gene_models.sh
+ensembl.fa
+jgi.ann
+join_models.pl
+kh.fa
+kyotograil.fa
+parse_blast.pl
+CINT06a520380F_sif.fa
+create_and_populate_db.pl
+ensembl.ann
+GO.terms_alt_ids
+jgi.fa
+kh.ann
+kyotograil.ann
+README
