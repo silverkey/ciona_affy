@@ -16,7 +16,18 @@
 
    Used to create the table go_definition.txt
 
-3) CinGOstat.R
+3) create_and_populate_go_definition_table.sql
+
+   Insert the table created by parse_standard_go_table.pl
+   into the annotation database for a better quering of the
+   annotations, given that many GO id used in aniseed are
+   taken by the secondary. TRY TO INTEGRATE THESE INTO
+   THE SCRIPT THAT CREATE AND POPULATE THE DB!
+
+   IT NEEDS THAT THE TABLE TO PUT INTO THE DB IS CALLED
+   go_definition.txt
+
+4) CinGOstat.R
    
    Once you have the 2 above files and a file with the
    probe id of the significantly differentially exspressed
