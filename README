@@ -27,6 +27,14 @@ Order:
    create the file ciona_affy_annotation.sqlite3
    ATTENTION: you have to change user and password into the script
 
+8) CinGOstat
+   Execute GOstat-like analysis on lists of differentially expressed transcripts
+
+9) query_probe.pl
+   is in progress. 
+   DOES NOT WORK YET!
+
+
 Other files we use (TODO: to put the download of them into a script, at least the GO):
 
 - CINT06a520380F.sif the file containing the sequences used by affy to design the probes.

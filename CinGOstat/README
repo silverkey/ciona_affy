@@ -1,0 +1,25 @@
+1) associate_GO_to_affy_id.pl
+
+   Work in the database of the annotations and create
+   a table associating at each probe id all the GO id
+   associated in aniseed to the gene models eliminating
+   the redundancies.
+
+   Used to create the table GO_array_annotation.txt
+
+2) parse_standard_go_table.pl
+   
+   Parse the official GO.terms_alt_ids table and write
+   in output the GO id associated to the terms eliminating
+   the column of the secondary GO id and adding them to the
+   first column as primary.
+
+   Used to create the table go_definition.txt
+
+3) CinGOstat.R
+   
+   Once you have the 2 above files and a file with the
+   probe id of the significantly differentially exspressed
+   transcripts it runs GOstat!
+
+   Write the table GO_significant.xls in output
