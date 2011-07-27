@@ -1,21 +1,71 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
-use Data::Dumper;
-use DBI;
 
-my $id = $ARGV[0];
-my $dbh = DBI->connect("dbi:SQLite:dbname=ciona_affy_annotation.sqlite3");
+my $USAGE = "\n\tUSAGE: perl $0 [annotation_file] [probe_id]\n\n";
+my $file = $ARGV[0];
+my $id = $ARGV[1];
+die $USAGE unless $file;
+die $USAGE unless -e $file;
+die $USAGE unless $id;
 
-my $anno = "select distinct probe_id, model_id, syno, orto, blast from association where probe_id=\'$id\'";
-$dbh->do($anno);
+my $tmp = 'probe.ann.tmp';
+my $command = "grep \'$id\' $file \> $tmp";
+system('clear');
+system('clear');
+system('clear');
+system($command);
 
+die "\n\nProbe id does not exists!\n\n" if -z $tmp;
 
+open(IN,$tmp);
+my $row = <IN>;
+chomp $row;
+my @field = split(/\t/,$row);
 
+# probe_id model_id syno orto blast go design model_seq
 
+my $model_seq = $field[7];
+$model_seq =~ s/\,/\n\n/g;
+$model_seq =~ s/\:/\n/g;
 
-__END__
-select distinct probe_id, model_id, syno, orto, blast from association where probe_id='ENSCINT00000021990_at';
-select model_id, seq from seq where model_id in (select model_id from association where probe_id='ENSCINT00000021990_at');
-select probe_id, seq from design where probe_id = 'ENSCINT00000021990_at';
-select distinct definition from model_go m, go g where m.go_id=g.go and model_id in (select model_id from association where probe_id='ENSCINT00000021990_at');
+print "
+----------------------------------------------------------------------------
+Probe ID
+---------
+$field[0]
+
+Matching Models
+----------------
+$field[1]
+
+Syno
+-----
+$field[2]
+
+Orto
+-----
+$field[3]
+
+Blast
+------
+$field[4]
+
+Gene Ontology
+--------------
+$field[5]
+
+Design Sequence
+----------------
+$field[6]
+
+Model Sequences
+----------------
+
+$model_seq
+--------------------------------------------------------
+
+";
+
+system("rm $tmp");
+

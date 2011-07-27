@@ -5,7 +5,8 @@ Order:
 
 2) join_models.pl
    parse the fasta and the annotations downloaded from aniseed
-   produce the file aniseed_models.xls, aniseed_models_go.xls, aniseed_models_seq.xls, aniseed_models.fa
+   produce the file aniseed_models.xls, aniseed_models_go.xls, aniseed_models_seq.xls,
+   aniseed_models.fa
 
 3) BLAST.sh
    run the blast of the affy probe .sit annotation against the transcripts models
@@ -27,12 +28,22 @@ Order:
    create the file ciona_affy_annotation.sqlite3
    ATTENTION: you have to change user and password into the script
 
-8) CinGOstat
-   Execute GOstat-like analysis on lists of differentially expressed transcripts
+8) create_summary.pl
+   creates the tables with the annotations summarized by all the analysis.
+   In the tables there is a row for each probe id. Tables are 2:
+   - CIONA_AFFY_ANNOTATION_SUMMARY.xls
+   - CIONA_AFFY_ANNOTATION_SUMMARY_SMALL.xls
+   the only difference is that in the '_SMALL.xls' one you do not find the sequences of
+   the matching gene models
 
 9) query_probe.pl
-   is in progress. 
-   DOES NOT WORK YET!
+   write in the terminal output all the information collected related to a single probe
+
+
+----------------
+CinGOstat FOLDER
+----------------
+To execute GOstat-like analysis on lists of differentially expressed transcripts
 
 
 Other files we use (TODO: to put the download of them into a script, at least the GO):
