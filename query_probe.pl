@@ -11,6 +11,8 @@ die $USAGE unless $id;
 
 my $tmp = 'probe.ann.tmp';
 my $command = "grep \'$id\' $file \> $tmp";
+# Add check for field (ID or MODEL?)
+
 system('clear');
 system('clear');
 system('clear');
@@ -68,4 +70,3 @@ $model_seq
 ";
 
 system("rm $tmp");
-
