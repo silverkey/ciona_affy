@@ -1,4 +1,36 @@
-Order:
+------------------------------------------------------------------------------------
+COLLECTION OF SCRIPTS TO BUILD A FLEXIBLE ANNOTATION MAPPING FOR CIONA INTESTINALIS
+------------------------------------------------------------------------------------
+
+Functional annotations mapping for the Ciona intestinalis transcriptome and proteome
+are poor in public databases. This is specifically reflected in the lack of proper
+annotations for the CINT06a520380F microarray. To our knowledge the best repository
+for Ciona intestinalis functional annotations is the Aniseed database. Unfortunately
+Aniseed data and sequences are separated in different files. Here we collected a
+collection of scripts aimed at solving this lack unifyng the different gene models,
+mapping all the probes of the microarray to the gene models and associating also
+functional annotations inferred in the Anissed database by homologies searches.
+
+In order to create the annotation file, the nucleotide sequences of probes are
+retrieved from Affymetrix library file (CINT06a520380F.sif) while the transcript
+models and annotations are downloaded from the ANISEED database:
+
+1) JGI version 1,
+2) KYOTOGRAIL2005,
+3) KH
+4) ENSEMBL.
+
+Transcript models and annotations are parsed and joined together to form a unique
+collection. Probeset sequences are then aligned against the collection of transcript
+models by using BLAST+ (Camacho C. et al., 2009) with the megablast algorithm option.
+Results are filtered in order to select exclusively hits with coverage >75% and
+identity >90%. Based on the selected hits, we associated each probeset to the
+corresponding transcript models and annotations. To perform such analysis. A MySQL
+database containing all the information downloaded and generated is used to collect
+and manage the data. This can be converted and made portable in an SQLite database
+which can be queried to retrieve information for single probeset.
+
+Order in which to run the script:
 
 1) downoload_gene_models.sh
    downoload the different gene models, annotations and sequences from the aniseed webpage
@@ -40,11 +72,16 @@ Order:
    write in the terminal output all the information collected related to a single probe
 
 
+THE ARCHIVE CIONA_AFFY_ANNOTATION_SUMMARY.tar.gz CONTAINS THE WHOLE OF THE ANNOTATIONS
+GENERATED IN 2011 IN USEFUL TABLE THAT CAN BE EASILY VIEWED IN EXCEL AS WELL AS LOADED
+IN DATABASES AND/OR IN OTHER SCRIPTS. TABLES HAVE THE .xls EXTENSION BUT THEY ARE REALLY
+TAB DELIMITED TEXT DATA.
+
+
 ----------------
 CinGOstat FOLDER
 ----------------
 To execute GOstat-like analysis on lists of differentially expressed transcripts
-
 
 Other files we use (TODO: to put the download of them into a script, at least the GO):
 
@@ -81,3 +118,14 @@ jgi.fa
 kh.ann
 kyotograil.ann
 README
+
+IN 2011 THE ANNOTATIONS TABLE HAVE ALREADY BEEN GENERATED AND ARE PRESENT
+IN THESE FOLDERS. SO YOU DO NOT REALLY NEED TO RE-GENERATE THEM DE-NOVO.
+
+A FILE WITH THE LIST OF SIGNIFICANTLY DIFFERENTIALLY EXPRESSED GENES IS THE
+ONLY THING YOU NEED TO RUN THE GOSTAT-LIKE ANALYSES. JUST EDIT THE R SCRIPT
+AND PUT INTO THE SAME FOLDER:
+
+- THE FILE WITH THE PROBE ID
+- THE GO_array_annotation.txt FILE
+- THE go_definition.txt FILE
