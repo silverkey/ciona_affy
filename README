@@ -22,13 +22,12 @@ models and annotations are downloaded from the ANISEED database:
 
 Transcript models and annotations are parsed and joined together to form a unique
 collection. Probeset sequences are then aligned against the collection of transcript
-models by using BLAST+ (Camacho C. et al., 2009) with the megablast algorithm option.
-Results are filtered in order to select exclusively hits with coverage >75% and
-identity >90%. Based on the selected hits, we associated each probeset to the
-corresponding transcript models and annotations. To perform such analysis. A MySQL
-database containing all the information downloaded and generated is used to collect
-and manage the data. This can be converted and made portable in an SQLite database
-which can be queried to retrieve information for single probeset.
+models by using MEGABLEST. Results are filtered in order to select exclusively hits
+with coverage >75% and identity >90%. Based on the selected hits, we associated each
+probeset to the corresponding transcript models and annotations. To perform such
+analysis. A MySQL database containing all the information downloaded and generated is
+used to collect and manage the data. This can be converted and made portable in an
+SQLite database which can be queried to retrieve information for single probeset.
 
 Order in which to run the script:
 
